@@ -1,13 +1,13 @@
 ---
 - name: Copy Configuration
   template:
-    src: haproxy.conf.j2
+    src: haproxy.cfg.j2
     dest:
-      /etc/haproxy/haproxy.conf
+      /etc/haproxy/haproxy.cfg
   register: config
 
 - name: HAProxy check config
-  command: haproxy -c -f /etc/haproxy/haproxy.conf
+  command: haproxy -c -f /etc/haproxy/haproxy.cfg
   when: config.changed
   notify:
     - reload haproxy
