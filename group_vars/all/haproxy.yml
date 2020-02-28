@@ -1,0 +1,9 @@
+---
+haproxy_package: "haproxy"
+haproxy_version: "2.0.13*"
+haproxy_apt_repository: ppa:vbernat/haproxy-2.0
+haproxy_package_state: present
+
+haproxy_service_state: started
+haproxy_service_enabled: true
+haproxy_restart_handler_state: reloaded

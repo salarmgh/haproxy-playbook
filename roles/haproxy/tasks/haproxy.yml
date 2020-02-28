@@ -1,0 +1,26 @@
+---
+- name: Ensure dependencies are installed.
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg2
+    state: present
+
+- name: Add HAProxy repository.
+  apt_repository:
+    repo: "{{ haproxy_apt_repository }}"
+    state: present
+    update_cache: true
+
+- name: Install HAProxy.
+  apt:
+    name: "{{ haproxy_package }}={{ haproxy_version }}"
+    state: "{{ haproxy_package_state }}"
+  notify: reload haproxy
+
+- name: Ensure HAProxy is started and enabled at boot.
+  service:
+    name: haproxy
+    state: "{{ haproxy_service_state }}"
+    enabled: "{{ haproxy_service_enabled }}"
